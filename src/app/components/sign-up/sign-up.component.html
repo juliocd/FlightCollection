@@ -1,0 +1,70 @@
+<form [formGroup]="userForm" (ngSubmit)="onSignUpFormSubmit()">
+  <app-alert 
+    (isAlertClosed)="onCloseAlert()"
+    *ngIf="alertText" 
+    [type]="alertType" 
+    [text]="alertText">
+  </app-alert>
+    <h2 class="text-base font-semibold leading-7 text-gray-900">Crate account</h2>
+    <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+      <div class="sm:col-span-3">
+        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address<span class="text-red-500">*</span></label>
+        <div class="mt-2">
+          <input
+            required
+            formControlName="email"
+            type="email" 
+            autocomplete="email" 
+            class="control-label block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+            <div class="text-red-500 text-xs italic" *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div *ngIf="email.errors?.['required']">Email is required.</div>
+              <div *ngIf="email.errors?.['email']">Please enter a valid email.</div>
+            </div>
+        </div>
+      </div>
+      <div class="sm:col-span-3"></div>
+      <div class="sm:col-span-3">
+        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Password<span class="text-red-500">*</span></label>
+        <div class="mt-2">
+          <input 
+            required
+            type="password" 
+            formControlName="password"
+            class="control-label block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+            <div class="text-red-500 text-xs italic" *ngIf="password.invalid && (password.dirty || password.touched)">
+              <div *ngIf="password.errors?.['required']">Password is required.</div>
+              <div *ngIf="password.errors?.['minlength']"> Password must be at least 6 characters long.</div>
+              <div *ngIf="password.errors?.['maxlength']"> Password cannot have more than 15 characters.</div>
+            </div>
+        </div>
+      </div>
+
+      <div class="sm:col-span-3">
+        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password<span class="text-red-500">*</span></label>
+        <div class="mt-2">
+          <input
+            required
+            type="password" 
+            formControlName="confirmPassword"
+            class="control-label block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <div class="text-red-500 text-xs italic" *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+              <div *ngIf="confirmPassword.errors?.['required']">Confirm Password is required.</div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-10 flex items-center justify-center gap-x-6">
+      <a 
+        href="login" 
+        class="bg-transparent hover:bg-indigo-500 text-sm text-center text-indigo-600 w-40 h-10 font-semibold hover:text-white px-3 py-2 border border-indigo-600 hover:border-transparent rounded">Cancel</a>
+      <button [disabled]="isLoadingValue" type="submit" type="submit" [ngClass]="{'w-40 h-10 px-4 py-2 font-semibold leading-6 text-sm text-center shadow rounded-md text-white bg-indigo-600 hover:bg-indigo-500 transition': true, 'cursor-not-allowed flex justify-center': isLoadingValue}">
+        <span *ngIf="isLoadingValue"> 
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </span>
+        {{isLoadingValue ? 'Processing...' : 'Submit'}}
+      </button>
+    </div>
+  </form>
