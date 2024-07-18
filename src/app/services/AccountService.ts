@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { getApiKey, getHost } from "../helpers/settings";
+import { getApiKey, getHost, SeriveProviders } from "../helpers/settings";
 
 @Injectable({
     providedIn: 'root'
 })
-export class FirebaseService {
-    private host = getHost();
-    private apiKey = getApiKey();
+export class AccountService {
+    private host = getHost(SeriveProviders.FIREBASE);
+    private apiKey = getApiKey(SeriveProviders.FIREBASE);
 
     constructor(public httpClient: HttpClient){}
 

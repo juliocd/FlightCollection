@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import AlertsEnum from 'src/app/enums/alertsEnum';
-import { passwordStrengthValidator } from 'src/app/helpers/utils';
-import { FirebaseService } from 'src/app/services/FirebaseService';
+import { AccountService } from 'src/app/services/AccountService';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +17,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder, 
-    private firebaseService: FirebaseService) {}
+    private accountService: AccountService) {}
 
   loginForm = this.formBuilder.group({
     email: ['', {
@@ -46,14 +45,13 @@ export class LoginComponent {
     this.alertText = null;
 
     this.isLoadingValue = !this.isLoadingValue;
-    this.firebaseService.signIn(this.email.value, this.password.value)
+    this.accountService.signIn(this.email.value, this.password.value)
       .subscribe({
-        next: (result) => {
-          console.log('result', result);
+        next: () => {
           this.isLoadingValue = !this.isLoadingValue;
           this.router.navigateByUrl("/home");
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err.error);
           if (err.error?.error?.message === "INVALID_LOGIN_CREDENTIALS") {
             this.alertText = 'Email or password is not correct.';
