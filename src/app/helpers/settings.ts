@@ -14,5 +14,5 @@ export function getApiKey(provider: SeriveProviders): string {
 }
 
 export function getToken(provider: SeriveProviders) {
-    return environment[provider] ?  `${environment[provider].token}` : '';
+    return environment[provider] ? `${environment[provider].token}` : '';
 }

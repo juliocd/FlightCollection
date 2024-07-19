@@ -10,18 +10,18 @@ export class FlightService {
     private host = getHost(SeriveProviders.MONSETER_RESERVATION_GROUP);
     private token = getToken(SeriveProviders.MONSETER_RESERVATION_GROUP);
 
-    constructor(public httpClient: HttpClient){}
+    constructor(public httpClient: HttpClient) { }
 
     flightInfoChallenge(flight: IFlight) {
         const options = {
             headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              'candidate': 'Julio Diaz',
-              'token': this.token
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'candidate': 'Julio Diaz',
+                'token': this.token
             }),
-          };
-      
+        };
+
         return this.httpClient.post<any>(`${this.host}/flightInfoChallenge`, flight, options);
     }
 
