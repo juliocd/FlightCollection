@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import AlertsEnum from 'src/app/enums/alertsEnum';
 import IFlight from 'src/app/models/IFlight';
 import { FlightService } from 'src/app/services/FlightService';
+import { SessionService } from 'src/app/services/SessionService';
 
 @Component({
     selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent {
 
     constructor(
         private router: Router,
+        private sessionService: SessionService,
         private formBuilder: FormBuilder,
         private flightService: FlightService) { }
 
@@ -139,7 +141,7 @@ export class HomeComponent {
                 next: (result) => {
                     this.isLoadingValue = !this.isLoadingValue;
                     this.alertType = AlertsEnum.SUCCESS;
-                    this.alertText = 'Information has been stored successfully.';
+                    this.alertText = 'The Flight information has been stored successfully.';
                     setInterval(() => {
                         this.onCloseAlert();
                     }, 5000);
@@ -160,5 +162,10 @@ export class HomeComponent {
 
     onCleanForm() {
         this.flightInfoForm.reset()
+    }
+
+    onLogOut() {
+        this.sessionService.destroySession();
+        this.router.navigateByUrl('login');
     }
 }

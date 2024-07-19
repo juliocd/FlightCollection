@@ -26,8 +26,10 @@
                     *ngIf="flightNumber.invalid && (flightNumber.dirty || flightNumber.touched)">
                     <div *ngIf="flightNumber.errors?.['required']">Flight Number is required.</div>
                     <div *ngIf="flightNumber.errors?.['pattern']">Flight Number is invalid.</div>
-                    <div *ngIf="flightNumber.errors?.['minlength']"> Flight Number must be at least 6 characters long.</div>
-                    <div *ngIf="flightNumber.errors?.['maxlength']"> Flight Number cannot have more than 9 characters.</div>
+                    <div *ngIf="flightNumber.errors?.['minlength']"> Flight Number must be at least 6 characters long.
+                    </div>
+                    <div *ngIf="flightNumber.errors?.['maxlength']"> Flight Number cannot have more than 9 characters.
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,8 +44,10 @@
                 <div class="text-red-500 text-xs italic"
                     *ngIf="arrivalDate.invalid && (arrivalDate.dirty || arrivalDate.touched)">
                     <div *ngIf="arrivalDate.errors?.['required']">Arrival Date is required.</div>
-                    <div *ngIf="arrivalDate.errors?.['minlength']"> Arrival Date must be at least 7 characters long.</div>
-                    <div *ngIf="arrivalDate.errors?.['maxlength']"> Arrival Date cannot have more than 10 characters.</div>
+                    <div *ngIf="arrivalDate.errors?.['minlength']"> Arrival Date must be at least 7 characters long.
+                    </div>
+                    <div *ngIf="arrivalDate.errors?.['maxlength']"> Arrival Date cannot have more than 10 characters.
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,8 +60,10 @@
                 <div class="text-red-500 text-xs italic"
                     *ngIf="arrivalTime.invalid && (arrivalTime.dirty || arrivalTime.touched)">
                     <div *ngIf="arrivalTime.errors?.['required']">Arrival Time is required.</div>
-                    <div *ngIf="arrivalTime.errors?.['minlength']"> Arrival Time must be at least 5 characters long.</div>
-                    <div *ngIf="arrivalTime.errors?.['maxlength']"> Arrival Time cannot have more than 7 characters.</div>
+                    <div *ngIf="arrivalTime.errors?.['minlength']"> Arrival Time must be at least 5 characters long.
+                    </div>
+                    <div *ngIf="arrivalTime.errors?.['maxlength']"> Arrival Time cannot have more than 7 characters.
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,8 +92,12 @@
         </div>
     </div>
     <div class="mt-10 flex items-center justify-center gap-x-6">
+        <button (click)="onLogOut()" type="button"
+            class="bg-transparent hover:bg-indigo-500 text-sm text-center text-indigo-600 w-40 h-10 font-semibold hover:text-white px-3 py-2 border border-indigo-600 hover:border-transparent rounded">Log
+            Out</button>
         <button (click)="onCleanForm()" type="button"
-            class="bg-transparent hover:bg-indigo-500 text-sm text-center text-indigo-600 w-40 h-10 font-semibold hover:text-white px-3 py-2 border border-indigo-600 hover:border-transparent rounded">Clean all</button>
+            class="bg-transparent hover:bg-indigo-500 text-sm text-center text-indigo-600 w-40 h-10 font-semibold hover:text-white px-3 py-2 border border-indigo-600 hover:border-transparent rounded">Clean
+            all</button>
         <button [disabled]="isLoadingValue" type="submit"
             [ngClass]="{'w-40 h-10 px-4 py-2 font-semibold leading-6 text-sm text-center shadow rounded-md text-white bg-indigo-600 hover:bg-indigo-500 transition': true, 'cursor-not-allowed flex justify-center': isLoadingValue}">
             <span *ngIf="isLoadingValue">

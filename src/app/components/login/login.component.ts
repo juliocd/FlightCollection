@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import AlertsEnum from 'src/app/enums/alertsEnum';
 import { AccountService } from 'src/app/services/AccountService';
+import { SessionService } from 'src/app/services/SessionService';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder, 
-    private accountService: AccountService) {}
+    private accountService: AccountService,
+    private sessinService: SessionService) {}
 
   loginForm = this.formBuilder.group({
     email: ['', {
@@ -47,17 +49,27 @@ export class LoginComponent {
     this.isLoadingValue = !this.isLoadingValue;
     this.accountService.signIn(this.email.value, this.password.value)
       .subscribe({
-        next: () => {
+        next: (result) => {
           this.isLoadingValue = !this.isLoadingValue;
+
+          this.sessinService.setUserSession({
+            email: result.email
+          });
+          this.sessinService.setSession({
+            idToken: result.idToken,
+            refreshToken: result.refreshToken,
+            expiresIn: result.expiresIn
+          });
+
           this.router.navigateByUrl("/home");
         },
         error: (err: any) => {
-          console.error(err.error);
           if (err.error?.error?.message === "INVALID_LOGIN_CREDENTIALS") {
             this.alertText = 'Email or password is not correct.';
           } else {
             this.alertText = 'There was an error processing the request. Please, try later.';
           }
+
           this.isLoadingValue = !this.isLoadingValue;
         }
       });;

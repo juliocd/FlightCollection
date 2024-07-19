@@ -79,7 +79,6 @@ export class SignUpComponent {
                     }, 5000);
                 },
                 error: (err) => {
-                    console.error(err.error);
                     if (err.error?.error?.message === "EMAIL_EXISTS") {
                         this.alertType = AlertsEnum.WARNING;
                         this.alertText = 'The email provided already exist. Please, enter a different email or sing in from the login page.';
@@ -88,7 +87,7 @@ export class SignUpComponent {
                     }
                     this.isLoadingValue = !this.isLoadingValue;
                 }
-            });;
+            });
     }
 
     get email() {
