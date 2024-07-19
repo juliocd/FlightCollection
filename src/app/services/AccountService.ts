@@ -10,16 +10,16 @@ export class AccountService {
     private host = getHost(SeriveProviders.FIREBASE);
     private apiKey = getApiKey(SeriveProviders.FIREBASE);
 
-    constructor(public httpClient: HttpClient){}
+    constructor(public httpClient: HttpClient) { }
 
-    signIn(email: string, password: string):Observable<any> {
+    signIn(email: string, password: string): Observable<any> {
         const options = {
             headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }),
-          };
-      
+        };
+
         return this.httpClient.post<any>(`${this.host}signInWithPassword?key=${this.apiKey}`, {
             email,
             password,
@@ -27,14 +27,14 @@ export class AccountService {
         }, options);
     }
 
-    signUp(email: string, password: string):Observable<any> {
+    signUp(email: string, password: string): Observable<any> {
         const options = {
             headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }),
-          };
-      
+        };
+
         return this.httpClient.post<any>(`${this.host}signUp?key=${this.apiKey}`, {
             email,
             password,
@@ -45,11 +45,11 @@ export class AccountService {
     getUserData(idToken: string) {
         const options = {
             headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }),
-          };
-      
-        return this.httpClient.post<any>(`${this.host}lookup?key=${this.apiKey}`, {idToken}, options);
+        };
+
+        return this.httpClient.post<any>(`${this.host}lookup?key=${this.apiKey}`, { idToken }, options);
     }
 }
