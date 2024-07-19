@@ -76,7 +76,7 @@ export class SignUpComponent {
                     this.alertText = 'You account has been created successfully. You will be redirected to the login page shortly.';
                     setInterval(() => {
                         this.router.navigateByUrl("/login");
-                    }, 5000);
+                    }, 3000);
                 },
                 error: (err) => {
                     if (err.error?.error?.message === "EMAIL_EXISTS") {
